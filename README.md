@@ -79,8 +79,7 @@ ws/src/
 
 
 
-https://github.com/user-attachments/assets/1bc084ae-2876-407f-9ac3-218366b90b10
-
+[Demo recording](docs/demo.mp4)
 
 
 
