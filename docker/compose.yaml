@@ -1,0 +1,29 @@
+services:
+  turtle_a:
+    image: nova-turtle
+    container_name: turtle_a
+    environment:
+      - DISPLAY=host.docker.internal:0
+      - ROS_DOMAIN_ID=42
+    volumes:
+      - ../ws:/ws
+    working_dir: /ws
+    stdin_open: true
+    tty: true
+    networks: [rosnet]
+
+  turtle_b:
+    image: nova-turtle
+    container_name: turtle_b
+    environment:
+      - ROS_DOMAIN_ID=42
+    volumes:
+      - ../ws:/ws
+    working_dir: /ws
+    stdin_open: true
+    tty: true
+    networks: [rosnet]
+
+networks:
+  rosnet:
+    driver: bridge
