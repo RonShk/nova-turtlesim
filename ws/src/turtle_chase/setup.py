@@ -26,6 +26,7 @@ setup(
         'console_scripts': [
             'mode_node = turtle_chase.mode_node:main',
             'chase_node = turtle_chase.chase_node:main',
+            'mouse_node = turtle_chase.mouse_node:main'
         ],
     },
 )
