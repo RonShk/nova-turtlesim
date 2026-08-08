@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'mode_node = turtle_chase.mode_node:main',
         ],
     },
 )
