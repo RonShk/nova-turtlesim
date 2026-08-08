@@ -61,6 +61,9 @@ RUN colcon build --symlink-install --mixin release --parallel-workers 2 \
         rosidl_default_generators \
         ament_cmake_python
 
+RUN echo "source /ros2_humble/install/local_setup.bash" >> /root/.bashrc \
+ && echo "[ -f /ws/install/local_setup.bash ] && source /ws/install/local_setup.bash" >> /root/.bashrc
+
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
