@@ -15,9 +15,8 @@ def generate_launch_description():
         output='screen',
     )
 
-    # /spawn does not exist until turtlesim is running, so delay this.
     spawn_turtle2 = TimerAction(
-        period=3.0,
+        period=1.0,
         actions=[
             ExecuteProcess(
                 cmd=[

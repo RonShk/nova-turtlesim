@@ -12,8 +12,8 @@ from turtle_interfaces.msg import ChaseMode
 
 
 # Tuning constants
-STOP_CHASING_BELOW = 1.0   # close enough, stop chasing
-STOP_FLEEING_ABOVE = 4.0   # far enough, stop fleeing
+STOP_CHASING_BELOW = 1.0   
+STOP_FLEEING_ABOVE = 4.0   
 ANGULAR_GAIN = 4.0
 LINEAR_GAIN = 1.5
 MAX_LINEAR = 3.0
@@ -23,7 +23,6 @@ class ChaseNode(Node):
     def __init__(self):
         super().__init__('chase_node')
 
-        # Latest known state. None until the first message arrives.
         self.turtle1_pose = None
         self.turtle2_pose = None
         self.chase = True
@@ -34,7 +33,6 @@ class ChaseNode(Node):
 
         self.cmd_pub = self.create_publisher(Twist, '/turtle2/cmd_vel', 10)
 
-        # Drive from a fixed-rate timer, NOT from a subscriber callback.
         self.create_timer(0.05, self.control_loop)   # 20 Hz
 
         self.get_logger().info('Chase node started.')
@@ -64,7 +62,6 @@ class ChaseNode(Node):
         dy = target.y - me.y
         distance = math.hypot(dx, dy)
 
-        # Which way do I want to face?
         if self.chase:
             desired_heading = math.atan2(dy, dx)      # toward
             should_move = distance > STOP_CHASING_BELOW
@@ -73,8 +70,6 @@ class ChaseNode(Node):
             should_move = distance < STOP_FLEEING_ABOVE
 
         # Angle error, wrapped to [-pi, pi].
-        # Doing it via atan2(sin, cos) handles wraparound correctly:
-        # naive subtraction gives 350 degrees where the answer is -10.
         raw_error = desired_heading - me.theta
         heading_error = math.atan2(math.sin(raw_error), math.cos(raw_error))
 
